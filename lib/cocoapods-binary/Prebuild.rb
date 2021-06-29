@@ -163,9 +163,10 @@ module Pod
                 
                 # If target shouldn't build, we copy all the original files
                 # This is for target with only .a and .h files
-                if not target.should_build? 
+                if not target.should_build?
+                    root_path_glob = root_path.to_path + '/.'
                     Prebuild::Passer.target_names_to_skip_integration_framework << target.name
-                    FileUtils.cp_r(root_path, target_folder, :remove_destination => true)
+                    FileUtils.cp_r(root_path_glob, target_folder, :remove_destination => true)
                     next
                 end
 
